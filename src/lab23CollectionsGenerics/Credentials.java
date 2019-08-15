@@ -1,9 +1,10 @@
 package lab23CollectionsGenerics;
 
+import java.io.Serializable;
 import java.util.Scanner;
 import java.util.UUID;
 
-public class Credentials {
+public class Credentials implements Serializable {
     UUID ID;
     private String lastName;
     private String firstName;

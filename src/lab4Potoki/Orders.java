@@ -5,10 +5,11 @@ import lab23CollectionsGenerics.Order;
 import lab23CollectionsGenerics.OrderStatus;
 import lab23CollectionsGenerics.ShoppingCart;
 
+import java.io.Serializable;
 import java.util.*;
 
 
-public class Orders<T extends Order> {
+public class Orders<T extends Order> implements Serializable {
 
     private LinkedList<T> orders;
     private Map<Date, T> dateOrder;
@@ -17,6 +18,9 @@ public class Orders<T extends Order> {
 
         this.orders = new LinkedList<>();
         this.dateOrder = new HashMap<>();
+    }
+
+    public Orders(LinkedList<T> list, HashMap<java.sql.Date, T> map) {
     }
 
     void addOrders(T object) {
@@ -57,7 +61,6 @@ public class Orders<T extends Order> {
             while (it.hasNext()) {
                 Order order = (Order) it.next();
                 if (order.getStatus() == OrderStatus.DONE) {
-                    //orders.remove(order);//зарыта соббака
                     it.remove();
                     System.out.println("------");
                     System.out.println("Delete order");
@@ -71,5 +74,13 @@ public class Orders<T extends Order> {
         for (Order order : orders) {
             order.show();
         }
+    }
+
+    public Map<Date, T> getTimeCreate() {
+        return dateOrder;
+    }
+
+    public void setTimeCreate(Map<Date, T> timeCreate) {
+        this.dateOrder = timeCreate;
     }
 }

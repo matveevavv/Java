@@ -1,9 +1,10 @@
 package lab1;
 
+import java.io.Serializable;
 import java.util.Scanner;
 import java.util.UUID;
 
-public abstract class Clothes implements ICrudAction {
+public abstract class Clothes implements ICrudAction, Serializable {
 
     public UUID ID;
     public String name;

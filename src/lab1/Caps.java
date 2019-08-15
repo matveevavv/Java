@@ -1,8 +1,11 @@
 package lab1;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Caps extends Clothes {
+public class Caps extends Clothes implements Serializable {
+
+    public String ident;
 
     public Caps() {
 

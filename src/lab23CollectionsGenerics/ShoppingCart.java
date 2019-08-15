@@ -2,11 +2,12 @@ package lab23CollectionsGenerics;
 
 import lab1.Clothes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.TreeSet;
 import java.util.UUID;
 
-public class ShoppingCart <T extends Clothes> {
+public class ShoppingCart <T extends Clothes> implements Serializable {
     ArrayList<T> cart;
     TreeSet<UUID> uuids;
 
