@@ -3,9 +3,10 @@ package lab1;
 import lab1.Clothes;
 import lab1.RandomData;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Shorts extends Clothes {
+public class Shorts extends Clothes implements Serializable {
 
     public Shorts() {
 

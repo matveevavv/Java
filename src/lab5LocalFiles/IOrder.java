@@ -7,9 +7,13 @@ import java.io.IOException;
 import java.util.UUID;
 
 public interface IOrder {
-    public  Order readByID(UUID ID) throws IOException, ClassNotFoundException;
-    public  void saveByID(Order order) throws IOException;
-    public Object readAll() throws IOException, ClassNotFoundException;
-    public  void saveAll(Orders orders) throws IOException;
+
+    Order readByID(UUID ID) throws IOException, ClassNotFoundException;
+
+    void saveByID(Order order) throws IOException;
+
+    Orders readAll() throws IOException, ClassNotFoundException;
+
+    void saveAll(Orders orders) throws IOException;
 
 }

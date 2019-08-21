@@ -10,6 +10,7 @@ import lab23CollectionsGenerics.ShoppingCart;
 
 import java.lang.reflect.Type;
 import java.sql.Date;
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,23 +23,25 @@ public final class OrderDeserializer implements JsonDeserializer<Order> {
         JsonObject jsonObj = json.getAsJsonObject();
 
         UUID id = UUID.fromString(jsonObj.get("ID").getAsString());
-        var status = OrderStatus.valueOf(jsonObj.get("Статус").getAsString());
+        OrderStatus status = OrderStatus.valueOf(jsonObj.get("status").getAsString());
 
         Date timeCreate = null;
         DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
         try {
-            timeCreate = new Date(format.parse(jsonObj.get("Дата создания").getAsString()).getTime());
+            timeCreate = new Date(format.parse(jsonObj.get("timeCreate").getAsString()).getTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        var timeWaiting = jsonObj.get("Ожидание").getAsLong();
+        var timeWaiting = jsonObj.get("timeWaiting").getAsLong();
 
         Type typecart = new TypeToken<ShoppingCart<Clothes>>() {
         }.getType();
 
-        ShoppingCart<Clothes> cart = context.deserialize(jsonObj.get("Карта покупателя"), typecart);
-        Credentials user = new Gson().fromJson(jsonObj.get("Покупатель"), Credentials.class);
+        ShoppingCart<Clothes> cart = context.deserialize(jsonObj.get("cart"), typecart);
+        Credentials user = new Gson().fromJson(jsonObj.get("user"), Credentials.class);
         return new Order(id, cart, user, status, timeCreate, timeWaiting);
+
+
     }
 }

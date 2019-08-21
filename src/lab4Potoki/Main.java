@@ -1,14 +1,9 @@
-package lab4Potoki;
-
-import lab1.Shorts;
-import lab23CollectionsGenerics.Credentials;
-import lab1.Caps;
-import lab23CollectionsGenerics.ShoppingCart;
-
-
-public class Main {
-
-        public static void main(String[] args) {
+//package lab4Potoki;
+//
+//
+//public class Main {
+//
+//        public static void main(String[] args) {
 
             //        lab23CollectionsGenerics.Credentials user = new lab23CollectionsGenerics.Credentials();
             //        System.out.println("Зарегистрируйтесь, чтобы совершить покупку");
@@ -83,18 +78,18 @@ public class Main {
 
 
 
-            Orders orders = new Orders();
-
-            Thread gen1 = new Thread(new Generator(orders));
-            Thread gen2 = new Thread(new Generator(orders));
-            gen1.start();
-            gen2.start();
-
-            Thread checkTime = new Thread(new CheckTime(orders, 1000));
-            Thread checkDone = new Thread(new CheckDone(orders, 1000));
-            checkTime.start();
-            checkDone.start();
-
-        }}
+//            Orders orders = new Orders(list, map);
+//
+//            Thread gen1 = new Thread(new Generator(orders));
+//            Thread gen2 = new Thread(new Generator(orders));
+//            gen1.start();
+//            gen2.start();
+//
+//            Thread checkTime = new Thread(new CheckTime(orders, 1000));
+//            Thread checkDone = new Thread(new CheckDone(orders, 1000));
+//            checkTime.start();
+//            checkDone.start();
+//
+//        }}
 
 

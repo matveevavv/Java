@@ -54,4 +54,23 @@ public abstract class Clothes implements ICrudAction, Serializable {
         return ID;
     }
 
+    public UUID getID() {
+        return ID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public static int getCount() {
+        return count;
+    }
+
+    public String getFirm() {
+        return firm;
+    }
 }

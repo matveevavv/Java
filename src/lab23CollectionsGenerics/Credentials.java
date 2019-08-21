@@ -12,7 +12,6 @@ public class Credentials implements Serializable {
     private String email;
 
     public Credentials(String lastName, String firstName, String middleName, String email){
- //   public lab23CollectionsGenerics.Credentials() {
         this.lastName = lastName;
         this.firstName = firstName;
         this.middleName = middleName;

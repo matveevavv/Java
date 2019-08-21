@@ -17,7 +17,7 @@ public class ShoppingCart <T extends Clothes> implements Serializable {
         this.uuids = new TreeSet<>();
     }
 
-    public TreeSet<UUID> getUuids() {
+    public TreeSet<UUID> getID() {
         return uuids;
     }
 

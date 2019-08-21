@@ -12,60 +12,72 @@ import java.lang.reflect.Type;
 import java.util.UUID;
 
 public class ManagerOrderJSON extends AManageOrder {
-    private Gson json;
+    public static final String PATH = "/home/latty/java/saveFile.json";
+    private final Gson json;
 
     public ManagerOrderJSON() {
-        saveFile = new File("/home/latty/java/saveFile.json");
+        saveFile = new File(PATH);
 
         GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(Order.class, new OrderDeserializer())
-                .registerTypeAdapter(Orders.class, new OrdersDeserializer())
-                .registerTypeAdapter(Clothes.class, new ClothesDeserializer());
+        gsonBuilder.registerTypeAdapter(Clothes.class, new ClothesDeserializer())
+                .registerTypeAdapter(Order.class, new OrderDeserializer())
+                .registerTypeAdapter(Orders.class, new OrdersDeserializer());
         json = gsonBuilder.setPrettyPrinting().create();
     }
 
     @Override
-    public Order readByID(UUID ID) throws IOException, ClassNotFoundException {
-        Order order = null;
-        FileReader read = new FileReader(saveFile.getAbsoluteFile());
-        if (!saveFile.exists()) {
-            return null;
+    public Order readByID(UUID id) {
+        Order order = new Order();
+        try (FileReader reader = new FileReader(PATH)) {
+            if (!saveFile.exists()) {
+                return null;
+            }
+            Type type = new TypeToken<Order>() {
+            }.getType();
+           order = json.fromJson(reader, type);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-        Type type = new TypeToken<Order>() {
-        }.getType();
-        order = json.fromJson(read, type);
         return order;
     }
 
     @Override
-    public void saveByID(Order order) throws IOException {
-        FileWriter write = new FileWriter(saveFile.getAbsoluteFile());
-        if (!saveFile.exists()) {
-            saveFile.createNewFile();
+    public void saveByID(Order order) {
+        try (FileWriter writer = new FileWriter(PATH))
+        {
+            if (saveFile.exists()) {
+                json.toJson(order, writer);
+            } else {
+                saveFile.createNewFile();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-        json.toJson(order, write);
     }
 
     @Override
-    public Object readAll() throws FileNotFoundException, NullPointerException {
-        FileReader read = new FileReader(saveFile.getAbsoluteFile());
+    public Orders readAll() throws FileNotFoundException, NullPointerException {
+        Orders orders = null;
+        FileReader read = new FileReader(PATH);
         if (!saveFile.exists()) {
             return null;
         }
         Type type = new TypeToken<Orders<Order>>() {
         }.getType();
-        return json.fromJson(read, type);
+        orders = json.fromJson(read, type);
+        return orders;
     }
 
     @Override
     public void saveAll(Orders orders) {
-        try (FileWriter write = new FileWriter(saveFile.getAbsoluteFile())) {
-            if (!saveFile.exists()) {
+        try (FileWriter writer = new FileWriter(PATH)) {
+            if (saveFile.exists()) {
+                json.toJson(orders, writer);
+            } else {
                 saveFile.createNewFile();
             }
-            json.toJson(orders, write);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 

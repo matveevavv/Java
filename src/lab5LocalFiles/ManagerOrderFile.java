@@ -35,15 +35,15 @@ public class ManagerOrderFile extends AManageOrder {
     }
 
     @Override
-    public Object readAll() throws IOException, ClassNotFoundException {
-        //Orders orders = null;
+    public Orders readAll() throws IOException, ClassNotFoundException {
+        Orders orders = null;
         ObjectInputStream oin = new ObjectInputStream(new FileInputStream(saveFile.getAbsoluteFile()));
         if (!saveFile.exists()){
             return null;
         }
-//        orders = (Orders) oin.readObject();
-//        return orders;
-        return oin.readObject();
+        orders = (Orders) oin.readObject();
+        return orders;
+
     }
 
     @Override

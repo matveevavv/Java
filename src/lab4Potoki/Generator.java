@@ -5,7 +5,9 @@ import lab23CollectionsGenerics.Credentials;
 import lab1.Caps;
 import lab23CollectionsGenerics.ShoppingCart;
 
-public class Generator extends ACheck {
+import java.io.Serializable;
+
+public class Generator extends ACheck implements Serializable {
 
     public Generator (Orders orders){
         super(orders);

@@ -1,6 +1,8 @@
 package lab4Potoki;
 
-abstract public class ACheck implements Runnable {
+import java.io.Serializable;
+
+abstract public class ACheck implements Runnable, Serializable {
 
     public boolean fRun = true;
     public long pause = 1000;

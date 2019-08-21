@@ -20,11 +20,14 @@ public class Orders<T extends Order> implements Serializable {
         this.dateOrder = new HashMap<>();
     }
 
-    public Orders(LinkedList<T> list, HashMap<java.sql.Date, T> map) {
+    public Orders(LinkedList<T> list, HashMap<Date, T> timeCreate) {
+        this.orders = list;
+        this.dateOrder = timeCreate;
     }
 
     void addOrders(T object) {
         this.orders.add(object);
+ //       dateOrder.put(object.getTimeCreate(), (T) object);
     }
 
     void deleteOrders(T object) {
@@ -35,7 +38,7 @@ public class Orders<T extends Order> implements Serializable {
         Order order = new Order(cart, user);
         orders.add((T) order);
         dateOrder.put(order.getTimeCreate(), (T) order);
-        cart.sokrashenyiShow();
+//        cart.sokrashenyiShow();
     }
 
     public void checkTime() {
@@ -44,15 +47,15 @@ public class Orders<T extends Order> implements Serializable {
             while (it.hasNext()) {
                 Order order = (Order) it.next();
 
-            if (order.getStatus() == OrderStatus.WAITING &&
-                    order.checkInterval(System.currentTimeMillis())) {
-                order.setStatus(OrderStatus.DONE);
-                System.out.println("------");
-                System.out.println("Check time");
-                System.out.println("------");
+                if (order.getStatus() == OrderStatus.WAITING &&
+                        order.checkInterval(System.currentTimeMillis())) {
+                    order.setStatus(OrderStatus.DONE);
+                    System.out.println("------");
+                    System.out.println("Check time");
+                    System.out.println("------");
+                }
             }
-        }
-    }}
+        }}
 
     public void checkDone() {
 
@@ -71,7 +74,7 @@ public class Orders<T extends Order> implements Serializable {
     }
 
     public void show() {
-        for (Order order : orders) {
+        for (T order : orders) {
             order.show();
         }
     }

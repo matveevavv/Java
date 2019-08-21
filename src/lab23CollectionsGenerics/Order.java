@@ -1,7 +1,6 @@
 package lab23CollectionsGenerics;
 
 import lab1.Clothes;
-import lab23CollectionsGenerics.Credentials;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -20,25 +19,28 @@ public class Order implements Serializable {
         this.ID = UUID.randomUUID();
         this.cart = cart;
         this.user = user;
-        status = OrderStatus.WAITING;
+        this.status = OrderStatus.WAITING;
         timeCreate = new Date(System.currentTimeMillis());
         timeWaiting = (int) (Math.random() * 1000);
     }
 
     public Order(UUID id, ShoppingCart<Clothes> cart, Credentials user, OrderStatus status, Date timeCreate, long timeWaiting) {
-
-        this.ID = ID;
-        this.status = status;
-        this.timeCreate = timeCreate;
-        this.timeWaiting = timeWaiting;
+        this.ID = UUID.randomUUID();
         this.cart = cart;
         this.user = user;
+        this.status = OrderStatus.WAITING;
+
+        this.timeCreate = new Date(System.currentTimeMillis());
+        this.timeWaiting = 1;
+    }
+
+    public Order() {
+
     }
 
 
-    public OrderStatus getStatus() {
-
-        return status;
+    public void setTimeWaiting(int timeWaiting) {
+        this.timeWaiting = timeWaiting;
     }
 
     public Date getTimeCreate() {
@@ -84,4 +86,18 @@ public class Order implements Serializable {
         System.out.println("Время создания:" + timeCreate);
         System.out.println("Время ожидания:" + timeWaiting);
     }
+
+    public void setTimeCreate(Date timeCreate) {
+        this.timeCreate = timeCreate;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public UUID getID() {
+        return ID;
+    }
+
+
 }
